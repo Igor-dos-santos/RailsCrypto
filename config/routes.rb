@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
+  devise_for :users
+  resources :posts
+  get 'home/about' 
+  get 'home/lookup'
+  post "/home/lookup" => '/home/lookup' 
+  root 'home#index' #this will make home/index the main result of the page.
 end
