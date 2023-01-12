@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="application.css">
 <h3>Crypto Currency Look Up</h3>   
 <br/>
 <%= form_tag home_lookup_path, :method => 'POST' do%>
@@ -6,12 +7,14 @@
 <% end %>
 
 <br/><br/> 
-
+<div class= "lookUpDiv" >
 <% if @symbol %>  
     <% for x in @lookup_coin["data" ] %> 
         <% if @symbol == x["symbol"] %>
-            <%= x['name']%>: $<%= x['quote']['USD']['price'].round(3) %><br/>
-            Rank: <%= x["cmc_rank"] %><br/><br/>
+            <h1><%= x['name']%>: $<%= x['quote']['USD']['price'].round(3) %></h1><br/>
+            <h2>Rank: <%= x["cmc_rank"] %></h2><br/><br/>
         <% end %> 
     <% end %>
+    </div>
 <% end %>
+ 
