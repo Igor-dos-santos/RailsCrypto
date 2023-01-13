@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Crypto dbs</h1>
+
+<div id="crypto_dbs">
+  <% @crypto_dbs.each do |crypto_db| %>
+    <%= render crypto_db %>
+    <p>
+      <%= link_to "Show this crypto db", crypto_db %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New crypto db", new_crypto_db_path %>

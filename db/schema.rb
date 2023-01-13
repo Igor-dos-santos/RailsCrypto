@@ -10,10 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_12_172247) do
-  create_table "cryptos", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2023_01_13_121300) do
+  create_table "crypto_dbs", force: :cascade do |t|
+    t.string "symbol"
+    t.string "user_integer"
+    t.decimal "cost_per"
+    t.decimal "amount_owned"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_integer"], name: "index_crypto_dbs_on_user_integer"
   end
 
   create_table "posts", force: :cascade do |t|

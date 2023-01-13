@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @crypto_db %>
+
+<div>
+  <%= link_to "Edit this crypto db", edit_crypto_db_path(@crypto_db) %> |
+  <%= link_to "Back to crypto dbs", crypto_dbs_path %>
+
+  <%= button_to "Destroy this crypto db", @crypto_db, method: :delete %>
+</div>
