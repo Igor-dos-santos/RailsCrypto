@@ -1,14 +1,24 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Crypto dbs</h1>
-
+<br/>
+<table class= "table table-striped table-bordered table-hover">
 <div id="crypto_dbs">
   <% @crypto_dbs.each do |crypto_db| %>
     <%= render crypto_db %>
+          <% for x in @coins['data'] %>
+          <% if crypto.symbol%>
+          <% crypto.symbol.upcase %>
+          <% end %>
+      <% for coin in @lookup_crypto %>
+          <% if coin == x['symbol'] %>
+              <%= x['name']%>: $<%= x['quote']['USD']['price'].round(3) %><br/>
+              Rank: <%= x["cmc_rank"] %><br/><br/>
+          <% end %>
+      <% end %>
+      <% end %>
     <p>
       <%= link_to "Show this crypto db", crypto_db %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New crypto db", new_crypto_db_path %>
+<%= link_to "New crypto db", new_crypto_db_path, class= "btn btn-default" %>

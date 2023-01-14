@@ -1,10 +1,17 @@
 class CryptoDbsController < ApplicationController
   before_action :set_crypto_db, only: %i[ show edit update destroy ]
-  before_action :authenticate_user!
-  
+  #before_action :authenticate_user!
+  #before_action :corect_user, only: %i[ show edit update destroy ]
   # GET /crypto_dbs or /crypto_dbs.json
   def index
     @crypto_dbs = CryptoDb.all
+    require 'net/http'
+    require 'json'
+    @url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?CMC_PRO_API_KEY=cf06a54c-413a-4cd6-9576-4681d376a3c2&start=1&limit=5000&convert=USD'
+    @uri = URI(@url)
+    @response = Net::HTTP.get(@uri) #this line gets the response from the web
+    @lookup_crypto = JSON.parse(@response) #this line parses it and converts to ruby
+
   end
 
   # GET /crypto_dbs/1 or /crypto_dbs/1.json
@@ -66,6 +73,14 @@ class CryptoDbsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def crypto_db_params
-      params.require(:crypto_db).permit(:symbol, :user_integer, :cost_per, :amount_owned)
+      params.require(:crypto_db).permit(:symbol, :user_id, :cost_per, :amount_owned)
     end
-end
+
+
+    def correct_user
+    @correct_user = current_user.crypto_db.find_by(id: params[:id])
+    redirect_to crypto_db_path, notice: "Not authororized to edit this entry" if @correct.nil?
+    end
+
+
+  end
